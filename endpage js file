@@ -1,0 +1,16 @@
+const username = document.getElementById('username');
+const saveScoreBtn = document.getElementById('saveScoreBtn');
+const finalScore = document.getElementById('finalScore');
+
+//const mostRecentScore allows us to get our most recent score from the game.js file
+const mostRecentScore = localStorage.getItem('mostRecentScore');
+finalScore.innerText = mostRecentScore;
+
+username.addEventListener('keyup', () => {
+    saveScoreBtn.disabled = !username.value;
+});
+
+//the preventdefault prevents the behaviour of the form that makes it pass events to a different page
+saveHighScore = (e) => {
+    e.preventDefault();
+};
