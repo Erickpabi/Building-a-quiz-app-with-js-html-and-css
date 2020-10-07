@@ -1,0 +1,101 @@
+const question = document.getElementById('question');
+
+//We add the arrayy from to convert choice-text into array
+const choices = Array.from(document.getElementsByClassName('choice-text'));
+
+let currentQuestion = {};
+let acceptingAnswers = false;
+let score = 0;
+let questionCounter = 0;
+let availableQuesions = [];
+
+let questions = [
+    {
+        question: 'What is the capital of Chile??',
+        choice1: 'Barbados',
+        choice2: 'San Diego',
+        choice3: 'Santiago',
+        choice4: 'Accra',
+        answer: 3,
+    },
+    {
+        question:
+            "What is the smallest country in the world?",
+        choice1: "Togo",
+        choice2: "Vatican city",
+        choice3: "Mauritius",
+        choice4: "Fiji",
+        answer: 2,
+    },
+    {
+        question: " Where will you find the River Thames?",
+        choice1: "Scotland",
+        choice2: "London,UK",
+        choice3: "Iceland",
+        choice4: "USA",
+        answer: 2,
+
+ question: " What is the largest country in the world?",
+        choice1: "Germany",
+        choice2: "Russia",
+        choice3: "USA",
+        choice4: "Brazil",
+        answer: 2,
+
+ question: " How many players are there in a rugby league team?",
+        choice1: "18",
+        choice2: "12",
+        choice3: "13",
+        choice4: "11",
+        answer: 3,
+    },
+];
+
+//CONSTANTS
+const CORRECT_BONUS = 10;
+const MAX_QUESTIONS = 5;
+
+startGame = () => {
+    questionCounter = 0;
+    score = 0;
+//The three dot before the questions makes us copy the questions in an array easily
+    availableQuesions = [...questions];
+    getNewQuestion();
+};
+
+getNewQuestion = () => {
+    if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+        //go to the end page
+        return window.location.assign('/end.html');
+    }
+    questionCounter++;
+//Math.floor enables us to make the random number an integer
+//Math.random makes us choose a number by random.Sometimes it gives float values so math.floor
+//helps us get an integer value
+    const questionIndex = Math.floor(Math.random() * availableQuesions.length);
+    currentQuestion = availableQuesions[questionIndex];
+    question.innerText = currentQuestion.question;
+
+    choices.forEach((choice) => {
+//This references the data number.
+        const number = choice.dataset['number'];
+        choice.innerText = currentQuestion['choice' + number];
+    });
+
+//Splice helps us deletes that question we have answered and so the user does not see it again
+    availableQuesions.splice(questionIndex, 1);
+    acceptingAnswers = true;
+};
+
+choices.forEach((choice) => {
+    choice.addEventListener('click', (e) => {
+        if (!acceptingAnswers) return;
+
+        acceptingAnswers = false;
+        const selectedChoice = e.target;
+        const selectedAnswer = selectedChoice.dataset['number'];
+        getNewQuestion();
+    });
+});
+
+startGame();
