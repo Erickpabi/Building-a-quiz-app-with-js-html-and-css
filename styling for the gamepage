@@ -1,0 +1,27 @@
+.choice-container {
+display: flex;
+margin-bottom: 0.5rem;
+width:100%;
+font-size:1.8rem;
+border:0.3rem solid rgb(86,165,235,0.25);
+background-color:white;
+}
+
+//choice container hover is just like the hover we made for the button in the indexpage
+.choice-container:hover{
+cursor:pointer;
+box-shadow:0 0.4rem 1.4rem 0 rgba(86,185,235,0.5);
+transform: translateY(-0.1rem);
+transition: transform 150ms;
+}
+
+// for the options a,b,c and d
+.choice-prefix {
+padding:2 rem 2.5 rem;
+background:color:#9D239D;
+color:#ffffff;
+}
+
+.choice-text {
+padding2.0 rem;
+}
